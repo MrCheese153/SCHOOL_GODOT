@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://dak31k7xgwper"]
+
+[ext_resource type="Script" uid="uid://defa5qn8sdxbd" path="res://version_1.tscn.gd" id="1_57dya"]
+[ext_resource type="Texture2D" uid="uid://c1xlcc4vcj51c" path="res://Sprites/New Piskel-1.png.png" id="2_30c1h"]
+[ext_resource type="Texture2D" uid="uid://dsqavv5m8r15t" path="res://Sprites/New Piskel-2.png.png" id="3_o02lt"]
+
+[sub_resource type="Animation" id="Animation_i3pqv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_onrkg"]
+resource_name = "bouncy"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(2, 0.5, 2, 0.5, 2, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2, 1), Vector2(1, 2), Vector2(0.5, 1), Vector2(1, 0.5), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(2, 0.5, 2, 0.5, 2, 0.5),
+"update": 0,
+"values": [0.3490658503988659, 0.0, -0.3490658503988659, 0.6981317007977318, 0.0, -0.6981317007977318]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i3pqv"]
+_data = {
+&"RESET": SubResource("Animation_i3pqv"),
+&"bouncy": SubResource("Animation_onrkg")
+}
+
+[node name="Version1" type="Node2D" unique_id=810302416]
+script = ExtResource("1_57dya")
+
+[node name="White" type="Sprite2D" parent="." unique_id=256590534]
+position = Vector2(640, 320)
+texture = ExtResource("2_30c1h")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1791518719]
+texture = ExtResource("3_o02lt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=134871569]
+libraries/ = SubResource("AnimationLibrary_i3pqv")
+autoplay = &"bouncy"
+
+[node name="HELLO_THERE" type="Label" parent="." unique_id=1021409721]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_right = 121.0
+offset_bottom = 49.0
+grow_horizontal = 0
+text = "HELLO     THERE
+"
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="." unique_id=951811020]
+wait_time = 2.5
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

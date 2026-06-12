@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://dfq2iqhuccltx"]
+
+[ext_resource type="Script" uid="uid://4vxvmd16aeo1" path="res://scenes/game.gd" id="1_lbhrr"]
+[ext_resource type="Texture2D" uid="uid://doghmovcgeltw" path="res://graphics/map.png" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://dghd7rii024ea" path="res://scenes/player.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://dqew3weeg73or" path="res://scenes/Tree.tscn" id="4_iywne"]
+[ext_resource type="PackedScene" uid="uid://c74s4fvhlodb5" path="res://scenes/box.tscn" id="5_p57ef"]
+[ext_resource type="PackedScene" uid="uid://bykvavuyy06ke" path="res://scenes/bench.tscn" id="6_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://b8fq8sgkmu4dx" path="res://graphics/objects/green car.png" id="7_u5sy4"]
+[ext_resource type="FontFile" uid="uid://hqpa84d2dqvp" path="res://fonts/Better VCR 9.0.1.ttf" id="8_gee14"]
+[ext_resource type="AudioStream" uid="uid://d05385du5fc0j" path="res://audio/S31-City on Speed.ogg" id="9_0tnpc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
+size = Vector2(20, 640)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
+size = Vector2(384, 20)
+
+[node name="Game" type="Node2D" unique_id=1466948013]
+script = ExtResource("1_lbhrr")
+
+[node name="BG" type="Sprite2D" parent="." unique_id=523398266]
+texture = ExtResource("1_uwrxv")
+metadata/_edit_lock_ = true
+
+[node name="Borders" type="Node2D" parent="." unique_id=254180935]
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Borders" unique_id=1128792386]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D" unique_id=535835136]
+position = Vector2(-202, 0)
+shape = SubResource("RectangleShape2D_lbhrr")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Borders" unique_id=51873048]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D2" unique_id=541205815]
+position = Vector2(202, 0)
+shape = SubResource("RectangleShape2D_lbhrr")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Borders" unique_id=1077828519]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D3" unique_id=125940318]
+position = Vector2(0, -330)
+shape = SubResource("RectangleShape2D_iywne")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Borders" unique_id=1795229280]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D4" unique_id=400270912]
+position = Vector2(0, 330)
+shape = SubResource("RectangleShape2D_iywne")
+
+[node name="FinishArea2D" type="Area2D" parent="Borders" unique_id=893521296]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Borders/FinishArea2D" unique_id=1398486080]
+polygon = PackedVector2Array(-192, -320, 192, -320, 192, -231, -192, -231)
+
+[node name="Timer" type="Node" parent="." unique_id=44365291]
+
+[node name="CarTimer" type="Timer" parent="Timer" unique_id=464544972]
+wait_time = 0.1
+autostart = true
+
+[node name="ScoreTimer" type="Timer" parent="Timer" unique_id=1911301520]
+autostart = true
+
+[node name="Objects" type="Node2D" parent="." unique_id=862377980]
+y_sort_enabled = true
+
+[node name="Player" parent="Objects" unique_id=218678995 instance=ExtResource("2_yqjtg")]
+position = Vector2(-13, 224)
+
+[node name="Tree" parent="Objects" unique_id=1780050591 instance=ExtResource("4_iywne")]
+position = Vector2(-41, 215)
+
+[node name="StaticBody2D" parent="Objects" unique_id=1044627564 instance=ExtResource("5_p57ef")]
+position = Vector2(-66, 224)
+
+[node name="bench" parent="Objects" unique_id=938880660 instance=ExtResource("6_u5sy4")]
+position = Vector2(13, 224)
+
+[node name="Stuff" type="StaticBody2D" parent="Objects" unique_id=270795205]
+
+[node name="GreenCar" type="Sprite2D" parent="Objects/Stuff" unique_id=1435020809]
+position = Vector2(-112, 64)
+texture = ExtResource("7_u5sy4")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Objects/Stuff" unique_id=126349504]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-117, 56, -105, 56, -105, 71, -117, 71)
+
+[node name="CarStartPositions" type="Node2D" parent="." unique_id=2120365648]
+metadata/_edit_lock_ = true
+
+[node name="Marker2D" type="Marker2D" parent="CarStartPositions" unique_id=421575951]
+position = Vector2(202, -4)
+
+[node name="Marker2D2" type="Marker2D" parent="CarStartPositions" unique_id=1342749531]
+position = Vector2(-202, -24)
+
+[node name="Marker2D3" type="Marker2D" parent="CarStartPositions" unique_id=441584312]
+position = Vector2(-202, -56)
+
+[node name="Marker2D4" type="Marker2D" parent="CarStartPositions" unique_id=1625540757]
+position = Vector2(202, -36)
+
+[node name="Marker2D5" type="Marker2D" parent="CarStartPositions" unique_id=937145033]
+position = Vector2(-202, -120)
+
+[node name="Marker2D6" type="Marker2D" parent="CarStartPositions" unique_id=401132856]
+position = Vector2(202, -100)
+
+[node name="Marker2D7" type="Marker2D" parent="CarStartPositions" unique_id=388279345]
+position = Vector2(-202, 88)
+
+[node name="Marker2D8" type="Marker2D" parent="CarStartPositions" unique_id=2005510162]
+position = Vector2(202, 108)
+
+[node name="Marker2D9" type="Marker2D" parent="CarStartPositions" unique_id=1279061300]
+position = Vector2(-202, 136)
+
+[node name="Marker2D10" type="Marker2D" parent="CarStartPositions" unique_id=1739191542]
+position = Vector2(202, 156)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1069038155]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=703016888]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("8_gee14")
+theme_override_font_sizes/font_size = 40
+text = "0"
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=836399492]
+stream = ExtResource("9_0tnpc")
+parameters/looping = true
+
+[connection signal="body_entered" from="Borders/FinishArea2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer/CarTimer" to="." method="_on_car_timer_timeout"]
+[connection signal="timeout" from="Timer/ScoreTimer" to="." method="_on_score_timer_timeout"]

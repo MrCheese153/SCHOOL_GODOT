@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dbuwrgkualb4o"]
+
+[ext_resource type="Script" uid="uid://co28q8g805a3k" path="res://node_3d.gd" id="1_noarx"]
+[ext_resource type="Texture2D" uid="uid://b41knm0tko4wa" path="res://Expressions.png" id="2_noarx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3fl7"]
+render_priority = 1
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.01
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+metadata/_stencil_owned = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jka67"]
+next_pass = SubResource("StandardMaterial3D_r3fl7")
+shading_mode = 0
+albedo_color = Color(0.46051443, 0.87032336, 0.6086932, 1)
+refraction_enabled = true
+stencil_mode = 1
+stencil_flags = 2
+
+[node name="Node3D" type="Node3D" unique_id=1438472067]
+script = ExtResource("1_noarx")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2143294588]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -2)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1969000713]
+transform = Transform3D(-1.24, 0, -1.08404244e-07, 0, 1.24, 0, 1.08404244e-07, 0, -1.24, 0, 0, 0)
+material = SubResource("StandardMaterial3D_jka67")
+
+[node name="Sprite3D" type="Sprite3D" parent="CSGBox3D" unique_id=623646475]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -0.55)
+texture_filter = 0
+texture = ExtResource("2_noarx")
+hframes = 3
+vframes = 3
+
+[node name="Timer" type="Timer" parent="." unique_id=718345209]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

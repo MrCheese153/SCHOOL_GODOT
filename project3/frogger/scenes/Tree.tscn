@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dqew3weeg73or"]
+
+[ext_resource type="Texture2D" uid="uid://d0so81ys3820n" path="res://graphics/objects/tree1.png" id="2_aefpu"]
+
+[sub_resource type="GDScript" id="GDScript_2cic4"]
+script/source = "extends StaticBody2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_omb14"]
+size = Vector2(8, 25)
+
+[node name="Tree" type="StaticBody2D" unique_id=1241446103]
+collision_mask = 0
+script = SubResource("GDScript_2cic4")
+
+[node name="Tree1" type="Sprite2D" parent="." unique_id=1201270447]
+texture = ExtResource("2_aefpu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1394826908]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_omb14")

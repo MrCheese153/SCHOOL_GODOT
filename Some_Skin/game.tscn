@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://elst0xn32iil"]
+
+[ext_resource type="Texture2D" uid="uid://ytmwc8nxttpv" path="res://Background.png" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://dceffjs8rpmpn" path="res://game.gd" id="1_e2o6t"]
+[ext_resource type="Texture2D" uid="uid://b2j2uoyeuk7o1" path="res://flakes1.png" id="2_feb5d"]
+[ext_resource type="Texture2D" uid="uid://crarv3l347ce1" path="res://Face1.png" id="4_7jktm"]
+[ext_resource type="Texture2D" uid="uid://b0cru2f4b6wlv" path="res://gunny_guy.png" id="5_ryrav"]
+[ext_resource type="Script" uid="uid://bxugqnugtnuf1" path="res://player.gd" id="6_eow3j"]
+[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="6_ryrav"]
+[ext_resource type="Texture2D" uid="uid://3lhckxadxn22" path="res://Select.png" id="8_j5wjh"]
+[ext_resource type="Texture2D" uid="uid://55w0r6qqako8" path="res://gunny.png" id="9_mfdv2"]
+[ext_resource type="Texture2D" uid="uid://yuy2q5bab3wn" path="res://dodge.png" id="10_iotsf"]
+[ext_resource type="Texture2D" uid="uid://dw6mcl0w3oc08" path="res://run.png" id="11_lc2xo"]
+
+[node name="Game" type="Node2D" unique_id=1851590790]
+script = ExtResource("1_e2o6t")
+
+[node name="PandT" type="Node2D" parent="." unique_id=765920344]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="PandT" unique_id=1442081157]
+position = Vector2(0, 625)
+amount = 250
+texture = ExtResource("2_feb5d")
+lifetime = 1.25
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 500.0
+initial_velocity_max = 1000.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+scale_amount_min = 0.1
+scale_amount_max = 2.0
+color = Color(0.6136515, 0.6136515, 0.6136515, 1)
+
+[node name="Timer" type="Timer" parent="PandT" unique_id=1894870140]
+wait_time = 0.00999999999999999
+autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=222016740]
+anchor_mode = 0
+
+[node name="The_Black_Transitor" type="Sprite2D" parent="." unique_id=2085750967]
+modulate = Color(0, 0, 0, 0)
+position = Vector2(575.99994, 324.00003)
+scale = Vector2(26.181816, 14.400001)
+texture = ExtResource("1_80nbo")
+
+[node name="GunnyGuy" type="Sprite2D" parent="." unique_id=729977540]
+position = Vector2(576, 233)
+scale = Vector2(3, 3)
+texture = ExtResource("5_ryrav")
+hframes = 3
+vframes = 2
+
+[node name="Bground" type="Node2D" parent="." unique_id=2096353586]
+
+[node name="Face3" type="Sprite2D" parent="Bground" unique_id=332600857]
+modulate = Color(0, 0, 0, 0.36862746)
+position = Vector2(575, 428.99997)
+scale = Vector2(10, 2.5)
+texture = ExtResource("4_7jktm")
+
+[node name="Face2" type="Sprite2D" parent="Bground" unique_id=49291743]
+modulate = Color(0, 0, 0, 0.36862746)
+position = Vector2(576, 350)
+scale = Vector2(6.0000005, 1.5000001)
+texture = ExtResource("4_7jktm")
+
+[node name="Face1" type="Sprite2D" parent="Bground" unique_id=666070461]
+modulate = Color(0, 0, 0, 0.36862746)
+position = Vector2(576, 315)
+scale = Vector2(4, 1)
+texture = ExtResource("4_7jktm")
+
+[node name="Player" type="Node2D" parent="." unique_id=2114035004]
+script = ExtResource("6_eow3j")
+
+[node name="option_border" type="Sprite2D" parent="Player" unique_id=384487779]
+modulate = Color(0, 0, 0, 0.5137255)
+position = Vector2(576, 556)
+scale = Vector2(9, 1.688)
+texture = ExtResource("6_ryrav")
+
+[node name="option_box" type="Sprite2D" parent="Player" unique_id=2078981217]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(576, 556)
+scale = Vector2(8, 1.5)
+texture = ExtResource("6_ryrav")
+
+[node name="Label" type="Label" parent="Player" unique_id=1225190137]
+offset_left = 140.0
+offset_top = 460.0
+offset_right = 1082.0
+offset_bottom = 501.0
+theme_override_font_sizes/font_size = 25
+text = "A Cowboy shows up"
+
+[node name="Select" type="Sprite2D" parent="Player" unique_id=1561071497]
+position = Vector2(160, 555)
+scale = Vector2(3, 3)
+texture = ExtResource("8_j5wjh")
+
+[node name="Gunny" type="Sprite2D" parent="Player" unique_id=1909236337]
+position = Vector2(275, 545)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("9_mfdv2")
+
+[node name="Dodge" type="Sprite2D" parent="Player" unique_id=89992074]
+position = Vector2(575, 560)
+texture = ExtResource("10_iotsf")
+
+[node name="Run" type="Sprite2D" parent="Player" unique_id=33145974]
+position = Vector2(875, 557)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("11_lc2xo")
+
+[node name="Timer" type="Timer" parent="Player" unique_id=1311292268]
+wait_time = 3.5
+
+[connection signal="timeout" from="PandT/Timer" to="." method="_on_timer_timeout"]
