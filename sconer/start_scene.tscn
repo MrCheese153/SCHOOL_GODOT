@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://65igdwp45tuf"]
+
+[ext_resource type="Script" uid="uid://defjnu2o6d54p" path="res://start_scene.gd" id="1_kyjdd"]
+[ext_resource type="Script" uid="uid://cxxnskj7wyost" path="res://current_game.gd" id="2_kyjdd"]
+
+[node name="Start_Scene" type="Node2D" unique_id=275595436]
+script = ExtResource("1_kyjdd")
+
+[node name="Current_Game" type="Node2D" parent="." unique_id=355737253]
+script = ExtResource("2_kyjdd")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=693240537]
+
+[node name="Get_Ready" type="Timer" parent="." unique_id=485603448]
+wait_time = 5.0
+one_shot = true
+
+[node name="Go" type="Timer" parent="." unique_id=1278117855]
+wait_time = 5.0
+one_shot = true
+
+[node name="Label" type="Label" parent="." unique_id=972242960]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1577781062]
+custom_minimum_size = Vector2(1000, 0)
+offset_left = -500.0
+offset_top = 250.0
+offset_right = 500.0
+offset_bottom = 277.0
+max_value = 5.0
+fill_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="child_entered_tree" from="Current_Game" to="Current_Game" method="_on_child_entered_tree"]

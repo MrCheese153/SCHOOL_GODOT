@@ -11,8 +11,12 @@ var will_blink = true
 var happy = true
 var sad = false
 var time_done = false
-var look_goal
-var look_goal_finder
+var look_goal = Vector3(0,0,-1)
+var look_goal_finder = .01
+var goalX
+var goalY 
+var stupidfuckingYfixer = false 
+var stupidfuckingXfixer = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,14 +40,34 @@ func _process(_delta: float) -> void:
 	
 	if happy:
 		box.look_at(ray_target, Vector3.UP)
-	#if sad:
+	if sad:
+		goalX = look_goal.x * look_goal_finder
+		goalY = look_goal.y * look_goal_finder
+		
+		if stupidfuckingYfixer and stupidfuckingXfixer:
+			box.look_at(Vector3(goalX,goalY,-1))
+		elif stupidfuckingYfixer:
+			box.look_at(Vector3(-goalX,goalY,-1))
+		elif stupidfuckingXfixer:
+			box.look_at(Vector3(goalX,-goalY,-1))
+		else:
+			box.look_at(Vector3(-goalX,-goalY,-1))
+		
+		if look_goal_finder < 1:
+			look_goal_finder += 0.1
 		
 		
 
-
+	
 	if time_done:
-		if sad:
-			look_goal = box.look_at(Vector3(randomI,randomI,-1),Vector3.UP)
+		if randomI >.5: stupidfuckingYfixer = true 
+		else: stupidfuckingYfixer = false
+		if randomI >.5: stupidfuckingXfixer = true
+		else: stupidfuckingXfixer = false
+		
+			
+		look_goal_finder = 0
+		look_goal = Vector3(randomI,randomI,-1)
 		timer.start()
 		time_done = false
 	blink = randi_range(1,1000)
@@ -73,9 +97,9 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_released("Lclick"):
 		will_blink = true
 		
-	print(cursor_location)
+	
 
-	#Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	
 
 func _on_timer_timeout() -> void:
