@@ -1,20 +1,130 @@
 [gd_scene format=3 uid="uid://cyr8xov7d2qsc"]
 
 [ext_resource type="Script" uid="uid://gpsoncjtyabm" path="res://game_1.gd" id="1_7qfw5"]
-[ext_resource type="Texture2D" uid="uid://fi571uf8b00j" path="res://icon.svg" id="1_kgrps"]
+[ext_resource type="Texture2D" uid="uid://c7svck04jbl70" path="res://Art/game1/Click_Him.png" id="2_ov8li"]
+[ext_resource type="Texture2D" uid="uid://r8wwae5l7af1" path="res://Art/game1/particle01.png" id="3_fks45"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7qfw5"]
 size = Vector2(130, 128)
 
+[sub_resource type="Animation" id="Animation_ov8li"]
+resource_name = "Laugh"
+length = 0.75
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Click_Him:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.46666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Click_Him:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.36666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.5235987755982988, 0.5235987755982988]
+}
+
+[sub_resource type="Animation" id="Animation_fks45"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Click_Him:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Click_Him:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_t3b1j"]
+resource_name = "defeated"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Click_Him:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.389033, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 3, 4, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Click_Him:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3.141592653589793, -3.141592653589793]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t3b1j"]
+_data = {
+&"Laugh": SubResource("Animation_ov8li"),
+&"RESET": SubResource("Animation_fks45"),
+&"defeated": SubResource("Animation_t3b1j")
+}
+
 [node name="Game_1" type="Node2D" unique_id=223460041]
 script = ExtResource("1_7qfw5")
 
-[node name="Click_Him" type="Sprite2D" parent="." unique_id=1892323082]
-texture = ExtResource("1_kgrps")
+[node name="Click_Him" type="Sprite2D" parent="." unique_id=1133488004]
+texture = ExtResource("2_ov8li")
+hframes = 5
 
 [node name="Area2D" type="Area2D" parent="Click_Him" unique_id=1666613331]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Click_Him/Area2D" unique_id=924792547]
 shape = SubResource("RectangleShape2D_7qfw5")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Click_Him" unique_id=1141853469]
+modulate = Color(1, 1, 1, 0.25882354)
+amount = 100
+texture = ExtResource("3_fks45")
+lifetime = 10.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 500.0
+orbit_velocity_min = -0.25
+orbit_velocity_max = 0.25
+scale_amount_min = 0.0
+scale_amount_max = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1529464580]
+libraries/ = SubResource("AnimationLibrary_t3b1j")
+autoplay = &"Laugh"
 
 [connection signal="input_event" from="Click_Him/Area2D" to="." method="_on_area_2d_input_event"]

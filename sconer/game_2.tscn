@@ -1,3 +1,24 @@
 [gd_scene format=3 uid="uid://c2bpnsuxte8bc"]
 
+[ext_resource type="Script" uid="uid://cwiqt8w1m3aiy" path="res://game_2.gd" id="1_me4bl"]
+[ext_resource type="Texture2D" uid="uid://fi571uf8b00j" path="res://icon.svg" id="2_31blf"]
+
 [node name="Game_2" type="Node2D" unique_id=1638935350]
+script = ExtResource("1_me4bl")
+
+[node name="Ground" type="Sprite2D" parent="." unique_id=42935262]
+position = Vector2(1.0728836e-05, 260)
+scale = Vector2(9, 1)
+texture = ExtResource("2_31blf")
+
+[node name="Jump_Thing" type="Sprite2D" parent="." unique_id=1512719583]
+modulate = Color(0, 2.067836, 0, 1)
+texture = ExtResource("2_31blf")
+
+[node name="Evil_Container" type="Node2D" parent="." unique_id=142130990]
+
+[node name="Evil_Thing" type="Sprite2D" parent="Evil_Container" unique_id=1802194800]
+modulate = Color(3.9651322, 0, 0, 1)
+position = Vector2(-594, 190)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_31blf")

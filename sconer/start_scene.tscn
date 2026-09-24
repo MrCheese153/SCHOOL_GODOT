@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://defjnu2o6d54p" path="res://start_scene.gd" id="1_kyjdd"]
 [ext_resource type="Script" uid="uid://cxxnskj7wyost" path="res://current_game.gd" id="2_kyjdd"]
+[ext_resource type="Texture2D" uid="uid://cl6ji0n3ox5a0" path="res://Art/font/font.png" id="3_jfucu"]
 
 [node name="Start_Scene" type="Node2D" unique_id=275595436]
 script = ExtResource("1_kyjdd")
@@ -43,4 +44,44 @@ max_value = 5.0
 fill_mode = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="ready_marker" type="Marker2D" parent="." unique_id=977350120]
+visible = false
+
+[node name="R" type="Sprite2D" parent="ready_marker" unique_id=1144675874]
+position = Vector2(-240, 0)
+texture = ExtResource("3_jfucu")
+hframes = 29
+frame = 17
+
+[node name="E" type="Sprite2D" parent="ready_marker" unique_id=666956096]
+position = Vector2(-144, 1)
+texture = ExtResource("3_jfucu")
+hframes = 29
+frame = 4
+
+[node name="A" type="Sprite2D" parent="ready_marker" unique_id=1062054094]
+position = Vector2(-48, 0)
+texture = ExtResource("3_jfucu")
+hframes = 29
+
+[node name="D" type="Sprite2D" parent="ready_marker" unique_id=1874405838]
+position = Vector2(48, 0)
+texture = ExtResource("3_jfucu")
+hframes = 29
+frame = 3
+
+[node name="Y" type="Sprite2D" parent="ready_marker" unique_id=1745918718]
+position = Vector2(144, 0)
+texture = ExtResource("3_jfucu")
+hframes = 29
+frame = 23
+
+[node name="?" type="Sprite2D" parent="ready_marker" unique_id=1040633892]
+position = Vector2(240, 0)
+texture = ExtResource("3_jfucu")
+hframes = 29
+frame = 26
+
 [connection signal="child_entered_tree" from="Current_Game" to="Current_Game" method="_on_child_entered_tree"]
+[connection signal="timeout" from="Get_Ready" to="." method="_on_get_ready_timeout"]
+[connection signal="timeout" from="Go" to="." method="_on_go_timeout"]

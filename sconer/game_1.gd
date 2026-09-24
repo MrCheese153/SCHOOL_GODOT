@@ -5,15 +5,18 @@ var MousePos
 
 @onready var guy = $Click_Him 
 
+
 func _ready() -> void:
-	var Max = randi_range(500,-500)
-	var Min = randi_range(250,-250)
-	guy.position = Vector2(Min,Max)
+	var X = randi_range(-600,550)
+	var Y = randi_range(-350,300)
+	guy.position = Vector2(X,Y)
+	print(guy.position)
 	
 	
 func _process(delta: float) -> void:
 	MousePos = get_viewport().get_mouse_position()
-	
+
+		
 	
 	
 
